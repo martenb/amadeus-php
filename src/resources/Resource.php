@@ -49,12 +49,15 @@ class Resource
     }
 
     /**
-     * @param object $object
+     * @param object|null $object
      * @param string $class
-     * @return object
+     * @return object|null
      */
-    public static function toResourceObject(object $object, string $class): object
+    public static function toResourceObject(?object $object, string $class): ?object
     {
+        if ($object === null) {
+            return null;
+        }
         $resourceObject = new $class();
         foreach ($object as $key => $value) {
             $resourceObject->__set($key, $value);
@@ -63,12 +66,15 @@ class Resource
     }
 
     /**
-     * @param array $array
+     * @param array|null $array
      * @param string $class
-     * @return array
+     * @return array|null
      */
-    public static function toResourceArray(array $array, string $class): array
+    public static function toResourceArray(?array $array, string $class): ?array
     {
+        if ($array === null) {
+            return null;
+        }
         $resourceArray = array();
         foreach ($array as $element) {
             $instance = new $class($element);
