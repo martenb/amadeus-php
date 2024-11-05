@@ -15,7 +15,7 @@ class FlightPointArrival implements ResourceInterface
     private ?array $timings = null;
 
     /**
-     * @return object|null
+     * @return FlightPointTerminal|null
      */
     public function getTerminal(): ?object
     {
