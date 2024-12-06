@@ -33,6 +33,28 @@ class FlightOrders
     }
 
     /**
+     * Flight Get Order API:
+     *
+     * Retrieve a given flight order.
+     *
+     *      $amadeus->getBooking()->getFlightOrders()->get($flightOrderId);
+     *
+     * @link https://developers.amadeus.com/self-service/category/flights/api-doc/flight-order-management/api-reference
+     *
+     * @param  string $flightOrderId identifier of the flight order
+     * @return FlightOrder           an API resource
+     * @throws ResponseException     when an exception occurs
+     */
+    public function get(string $flightOrderId): object
+    {
+        $response = $this->amadeus->getClient()->getWithOnlyPath(
+            sprintf('/v1/booking/flight-orders/%d', $flightOrderId)
+        );
+
+        return Resource::fromObject($response, FlightOrder::class);
+    }
+
+    /**
      * Flight Create Orders API:
      *
      * The Flight Create Orders API allows you to perform flight booking.
